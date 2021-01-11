@@ -6,5 +6,5 @@ Using the helpful techniques such as localStorage() we are able to store any inf
 This task also allowed us to learn the usefulness of third party APIs such as Bootstrap and Moment.js to name a couple. 
 
 ### Example of the Website
-Below you will see a screenshot of the current site:
+Below you will see a screenshot of the current site: https://azun510.github.io/Scheduler/
 ![Screenshot](./assets/scheduler.png)
