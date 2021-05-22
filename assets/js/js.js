@@ -1,40 +1,56 @@
-$(function () {
-  var todaysDate = moment().format("LL");
-  var inputs = [];
+$(document).ready(function () {
+  //Global Variables
+  var todayDate = moment().format("LL");
+  var events = [];
+  var currentTime = moment().hour();
 
-  //This will add the current date
-  $("#currentDay").append(todaysDate);
+  //current date
+  $("#currentDay").append(todayDate);
 
-  //This will allow the save button to save any info description into the local storage
+  //save the event information
   $(".saveBtn").on("click", function () {
-    var time = $(this);
+    var matchTime = $(this).data("time");
+    var eventInfo = $("#" + matchTime).val();
 
-    // JSON Format
     var eventEntry = {
-      //variables here but need to know how
+      information: eventInfo,
+      time: matchTime,
     };
 
-    //Pushes the inputs into the empty array above in the global variables section
-    inputs.push(eventEntry);
-
-    //Using JSON String to to convert these objects into a string for easy storing and access
-
-    localStorage.setItem("inputs", JSON.stringify(inputs));
+    events.push(eventEntry);
+    localStorage.setItem("events", JSON.stringify(events));
   });
-  //This loads all events
-  var loadEvents = function () {
-    //JSON Parse to convert the string back into an object allowing the information to be retrievable
-    var localEvents = JSON.parse(localStorage.getItem("inputs"));
-    if (localEvents !== null) {
-      inputs = localEvents;
 
-      for (let i = 0; i < inputs.length; i++) {
-        //find a way to access the stored info not sure yet
+  //load the saved events
+  var loadEvents = function () {
+    var localEvents = JSON.parse(localStorage.getItem("events"));
+    if (localEvents !== null) {
+      events = localEvents;
+
+      for (let i = 0; i < events.length; i++) {
+        var information = events[i].information;
+        var time = events[i].time;
+
+        $("#" + time).val(information);
       }
     }
   };
 
   loadEvents();
+
+  //apply new class if event is past
+
+  $(".time-block").each(function () {
+    if (parseInt($(this).attr("data-time")) < currentTime) {
+      $(this).addClass("past");
+    } else if (parseInt($(this).attr("data-time")) === currentTime) {
+      $(this).removeClass("future");
+      $(this).addClass("present");
+    } else if (parseInt($(this).attr("data-time")) > currentTime) {
+      $(this).removeClass("present");
+      $(this).addClass("future");
+    }
+  });
 });
 
 // first attempt ignore for now
