@@ -7,4 +7,4 @@ This task also allowed us to learn the usefulness of third party APIs such as Bo
 
 ### Example of the Website
 Below you will see a screenshot of the current site: https://azun510.github.io/Scheduler/
-![Screenshot](./assets/scheduler.png)
+![Screenshot](./assets/images/scheduler.png)
