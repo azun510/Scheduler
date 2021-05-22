@@ -1,43 +1,41 @@
-$(function() {
-    var todaysDate = moment().format('LL')
-    var inputs = []
+$(function () {
+  var todaysDate = moment().format("LL");
+  var inputs = [];
 
-    //This will add the current date
-    $("#currentDay").append(todaysDate);
+  //This will add the current date
+  $("#currentDay").append(todaysDate);
 
-    //This will allow the save button to save any info description into the local storage
-    $(".saveBtn").on("click", function() {
-        var time = $(this)
-        
-        // JSON Format
-        var eventEntry = {
-            //variables here but need to know how
-        }
+  //This will allow the save button to save any info description into the local storage
+  $(".saveBtn").on("click", function () {
+    var time = $(this);
 
-        //Pushes the inputs into the empty array above in the global variables section
-        inputs.push(eventEntry);
+    // JSON Format
+    var eventEntry = {
+      //variables here but need to know how
+    };
 
-        //Using JSON String to to convert these objects into a string for easy storing and access 
+    //Pushes the inputs into the empty array above in the global variables section
+    inputs.push(eventEntry);
 
-        localStorage.setItem("inputs", JSON.stringify(inputs));
-    
-    })
-     //This loads all events
-    var loadEvents = function() {
-        //JSON Parse to convert the string back into an object allowing the information to be retrievable 
-        var localEvents = JSON.parse(localStorage.getItem("inputs"));
-        if (localEvents !== null) {
-            inputs = localEvents
+    //Using JSON String to to convert these objects into a string for easy storing and access
 
-            for (let i = 0; i < inputs.length; i++) {
-                //find a way to access the stored info not sure yet
-            }
-        }
+    localStorage.setItem("inputs", JSON.stringify(inputs));
+  });
+  //This loads all events
+  var loadEvents = function () {
+    //JSON Parse to convert the string back into an object allowing the information to be retrievable
+    var localEvents = JSON.parse(localStorage.getItem("inputs"));
+    if (localEvents !== null) {
+      inputs = localEvents;
+
+      for (let i = 0; i < inputs.length; i++) {
+        //find a way to access the stored info not sure yet
+      }
     }
+  };
 
-    loadEvents();
-})
-
+  loadEvents();
+});
 
 // first attempt ignore for now
 // n =  new Date();
